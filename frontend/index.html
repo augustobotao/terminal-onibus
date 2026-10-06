@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal de Ônibus</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+
+    <header class="topbar">
+        <a class="brand" href="index.html">
+            <span class="brand-icon">🚌</span>
+            <span>
+                <strong>Terminal de Ônibus</strong>
+                <small>Beira</small>
+            </span>
+        </a>
+        <div class="topbar-right">
+            <a href="indisponivel.html">👤 Olá, Visitante ▾</a>
+            <span>🕒 18 set 2026</span>
+        </div>
+    </header>
+
+    <nav class="sidebar" aria-label="Menu principal">
+        <ul>
+            <li><a class="ativo" href="index.html">🏠 Início</a></li>
+            <li><a href="viagens.html">🚌 Viagens</a></li>
+            <li><a href="reservas.html">🎟️ Reservas</a></li>
+            <li><a href="bilhetes.html">🎫 Meus Bilhetes</a></li>
+            <li><a href="perfil.html">👤 Perfil</a></li>
+            <li><a href="ajuda.html">❓ Ajuda</a></li>
+        </ul>
+        <p class="slogan">Viaje com segurança, chegue mais longe!</p>
+    </nav>
+
+    <main class="content">
+        <section class="hero">
+            <img class="hero-img" src="imagens/img-onibus.jpg" alt="imagem de onibus">
+            <div class="hero-texto">
+                <h1>Bem-vindo ao Terminal de Ônibus da Beira</h1>
+                <p>Compre a sua passagem de forma rápida, segura e sem complicações.</p>
+            </div>
+        </section>
+
+        <section class="atalhos" aria-label="Atalhos">
+            <a class="atalho" href="indisponivel.html">
+                <span class="icone">🚌</span>
+                <h3>Consultar Viagens</h3>
+                <p>Veja horários, destinos e preços das passagens.</p>
+                <span class="seta">→</span>
+            </a>
+            <a class="atalho" href="indisponivel.html">
+                <span class="icone">🎟️</span>
+                <h3>Comprar Passagem</h3>
+                <p>Reserve o seu lugar de forma rápida e segura.</p>
+                <span class="seta">→</span>
+            </a>
+            <a class="atalho" href="indisponivel.html">
+                <span class="icone">🎫</span>
+                <h3>Meus Bilhetes</h3>
+                <p>Visualize e gira as suas reservas.</p>
+                <span class="seta">→</span>
+            </a>
+            <a class="atalho" href="indisponivel.html">
+                <span class="icone">👤</span>
+                <h3>Minha Conta</h3>
+                <p>Aceda aos seus dados e preferências.</p>
+                <span class="seta">→</span>
+            </a>
+        </section>
+
+        <section class="busca">
+            <h2>🚌 Encontre a sua viagem</h2>
+            <form action="indisponivel.html" method="get">
+                <div>
+                    <label for="origem">Origem</label>
+                    <select id="origem" name="origem">
+                        <option>Beira</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="destino">Destino</label>
+                    <select id="destino" name="destino" required>
+                        <option value="">Selecione o destino</option>
+                        <option>Maputo</option>
+                        <option>Nampula</option>
+                        <option>Quelimane</option>
+                        <option>Chimoio</option>
+                        <option>Tete</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="data">Data da viagem</label>
+                    <input type="date" id="data" name="data" value="2026-10-01">
+                </div>
+                <button type="submit">🔍 Buscar</button>
+            </form>
+        </section>
+
+        <section class="destaques">
+            <div class="destaques-topo">
+                <h2>🚌 Viagens em destaque</h2>
+                <a href="indisponivel.html">Ver todas →</a>
+            </div>
+            <div class="viagens">
+                <article class="viagem">
+                    <h3>Beira → Maputo</h3>
+                    <p>🕒 08:00 | 12:30 | 16:00</p>
+                    <p>🚌 Transporte União</p>
+                    <p class="preco">10 MT / adulto</p>
+                    <a class="botao" href="indisponivel.html">Selecionar</a>
+                </article>
+                <article class="viagem">
+                    <h3>Beira → Nampula</h3>
+                    <p>🕒 07:30 | 13:00 | 18:30</p>
+                    <p>🚌 Expresso do Norte</p>
+                    <p class="preco">10 MT / adulto</p>
+                    <a class="botao" href="indisponivel.html">Selecionar</a>
+                </article>
+                <article class="viagem">
+                    <h3>Beira → Quelimane</h3>
+                    <p>🕒 09:00 | 14:20 | 19:00</p>
+                    <p>🚌 Transportes Maciene</p>
+                    <p class="preco">10 MT / adulto</p>
+                    <a class="botao" href="indisponivel.html">Selecionar</a>
+                </article>
+                <article class="viagem">
+                    <h3>Beira → Chimoio</h3>
+                    <p>🕒 06:30 | 11:00 | 17:15</p>
+                    <p>🚌 Viação Zambeze</p>
+                    <p class="preco">10 MT / adulto</p>
+                    <a class="botao" href="indisponivel.html">Selecionar</a>
+                </article>
+            </div>
+        </section>
+
+    </main>
+</div>
+</body>
+</html>

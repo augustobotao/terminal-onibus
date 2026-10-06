@@ -3,7 +3,7 @@
 **Cadeira:** Programação Web | **Curso:** Engenharia Informática, 2.º ano
 **Instituição:** Universidade Zambeze, Faculdade de Ciências e Tecnologia
 **Docente:** MSc. Eng.º Félix Macueia
-**Membros do grupo:** Augusto Botão, (colega 2), (colega 3), (colega 4)
+**Membros do grupo:** Augusto Botão, Paulo Augusto Nortamo
 
 ## 1. Descrição
 
@@ -14,7 +14,7 @@ e um site público onde os clientes consultam partidas e fazem reservas virtuais
 ## 2. Tecnologias
 
 - Frontend: HTML, CSS e JavaScript
-- Backend: Node.js (Express)
+- Backend: PHP ou Node.js (Express)
 - Base de dados: SQLite
 - Controlo de versões: Git e GitHub
 
@@ -67,14 +67,3 @@ Terminal intermediário, Cliente, Reserva, Histórico de viagens.
 5. Média de lugares reservados
 6. Ônibus totalmente reservados
 7. Transporte com maior arrecadação histórica
-
-## 8. Plano de trabalho
-
-| Tarefa | Responsável | Prazo |
-|--------|-------------|-------|
-| Modelo de dados e script SQLite | | |
-| Servidor Node e rotas | | |
-| Painel de administração | | |
-| Site do cliente | | |
-| Consultas e relatórios | | |
-| Testes e relatório final | | |
