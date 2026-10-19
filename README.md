@@ -3,7 +3,7 @@
 **Cadeira:** Programação Web | **Curso:** Engenharia Informática, 2.º ano
 **Instituição:** Universidade Zambeze, Faculdade de Ciências e Tecnologia
 **Docente:** MSc. Eng.º Félix Macueia
-**Membros do grupo:** Augusto Botão, Paulo Augusto Nortamo
+**Discente:** Augusto Botão
 
 ## 1. Descrição
 
