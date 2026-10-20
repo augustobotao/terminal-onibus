@@ -1,142 +1,466 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-MZ">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terminal de Ônibus</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<div class="app">
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    <header class="topbar">
+      :root {
+        --azul-escuro: #0b2a5b;
+        --azul: #0b5ed7;
+        --fundo: #f4f7fb;
+        --texto: #1b2a41;
+        --cinza: #5b6b82;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--texto);
+        background: var(--fundo);
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* Estrutura geral */
+      .app {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: 80px 1fr;
+        min-height: 100vh;
+      }
+
+      /* Barra superior */
+      .topbar {
+        grid-column: 1 / -1;
+        background: var(--azul-escuro);
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-icon {
+        font-size: 2rem;
+      }
+      .brand strong {
+        display: block;
+        font-size: 1.4rem;
+      }
+      .brand small {
+        color: #c9d6ee;
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      /* Menu lateral */
+      .sidebar {
+        background: var(--azul-escuro);
+        color: #fff;
+        padding: 20px 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .sidebar a {
+        display: block;
+        padding: 14px 16px;
+        border-radius: 6px;
+        margin-bottom: 6px;
+      }
+      .sidebar a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .sidebar a.ativo {
+        background: var(--azul);
+      }
+      .slogan {
+        text-align: center;
+        font-style: italic;
+        color: #a9bbdc;
+        font-size: 0.9rem;
+        padding: 20px 10px;
+      }
+
+      /* Conteúdo */
+      .content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        min-height: 24opx;
+        background: var(--azul-escuro);
+        color: #fff;
+      }
+      .hero-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right center;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(11, 42, 91, 0.95) 0%,
+          rgba(11, 42, 91, 0.2) 100%
+        );
+      }
+      .hero-texto {
+        position: relative;
+        z-index: 1;
+        padding: 48px 40px;
+      }
+
+      /* Atalhos */
+      .atalhos {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .atalho {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        display: block;
+      }
+      .atalho:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      }
+      .icone {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #e6efff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+      }
+      .atalho h3 {
+        margin-bottom: 6px;
+      }
+      .atalho p {
+        color: var(--cinza);
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+      }
+      .seta {
+        color: var(--azul);
+        font-size: 1.4rem;
+      }
+
+      /* Pesquisa */
+      .busca {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      }
+      .busca h2 {
+        margin-bottom: 16px;
+        font-size: 1.3rem;
+      }
+      .busca form {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 16px;
+        align-items: end;
+      }
+      label {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+      }
+      select,
+      input[type="date"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cfd8e6;
+        border-radius: 6px;
+        font-size: 1rem;
+        background: #fff;
+      }
+      button,
+      .botao {
+        display: inline-block;
+        background: var(--azul);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 12px 28px;
+        font-size: 1rem;
+        text-align: center;
+        cursor: pointer;
+      }
+      button:hover,
+      .botao:hover {
+        background: #094bb0;
+      }
+
+      /* Viagens em destaque */
+      .destaques-topo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .destaques-topo a {
+        color: var(--azul);
+        font-size: 0.95rem;
+      }
+      .viagens {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .viagem {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      }
+      .viagem h3 {
+        margin-bottom: 10px;
+      }
+      .viagem p {
+        color: var(--cinza);
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+      }
+      .viagem .preco {
+        color: var(--azul);
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin: 12px 0;
+      }
+      .viagem .botao {
+        width: 100%;
+      }
+
+      /* Página indisponível */
+      .pagina-aviso {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .aviso {
+        background: #fff;
+        padding: 48px;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 440px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .aviso-icone {
+        font-size: 3rem;
+      }
+      .aviso h1 {
+        margin: 12px 0;
+      }
+      .aviso p {
+        color: var(--cinza);
+        margin-bottom: 24px;
+      }
+
+      footer {
+        margin: 0px auto 0px auto;
+        text-align: center;
+      }
+
+      /* Ecrãs pequenos */
+      @media (max-width: 900px) {
+        .app {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto 1fr;
+        }
+        .sidebar ul {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .slogan {
+          display: none;
+        }
+        .atalhos,
+        .viagens {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .busca form {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
         <a class="brand" href="index.html">
-            <span class="brand-icon">🚌</span>
-            <span>
-                <strong>Terminal de Ônibus</strong>
-                <small>Beira</small>
-            </span>
+          <span class="brand-icon">🚌</span>
+          <span>
+            <strong>Terminal de Ônibus</strong>
+            <small>Beira</small>
+          </span>
         </a>
         <div class="topbar-right">
-            <a href="indisponivel.html">👤 Olá, Visitante ▾</a>
-            <span>🕒 18 set 2026</span>
+          <a href="indisponivel.html">👤 Olá, Visitante ▾</a>
+          <span>🕒 18 set 2026</span>
         </div>
-    </header>
+      </header>
 
-    <nav class="sidebar" aria-label="Menu principal">
+      <nav class="sidebar" aria-label="Menu principal">
         <ul>
-            <li><a class="ativo" href="index.html">🏠 Início</a></li>
-            <li><a href="viagens.html">🚌 Viagens</a></li>
-            <li><a href="reservas.html">🎟️ Reservas</a></li>
-            <li><a href="bilhetes.html">🎫 Meus Bilhetes</a></li>
-            <li><a href="perfil.html">👤 Perfil</a></li>
-            <li><a href="ajuda.html">❓ Ajuda</a></li>
+          <li><a class="ativo" href="index.html">🏠 Início</a></li>
+          <li><a href="viagens.html">🚌 Viagens</a></li>
+          <li><a href="reservas.html">🎟️ Reservas</a></li>
+          <li><a href="bilhetes.html">🎫 Meus Bilhetes</a></li>
+          <li><a href="perfil.html">👤 Perfil</a></li>
+          <li><a href="ajuda.html">❓ Ajuda</a></li>
         </ul>
         <p class="slogan">Viaje com segurança, chegue mais longe!</p>
-    </nav>
+      </nav>
 
-    <main class="content">
+      <main class="content">
         <section class="hero">
-            <img class="hero-img" src="imagens/img-onibus.jpg" alt="imagem de onibus">
-            <div class="hero-texto">
-                <h1>Bem-vindo ao Terminal de Ônibus da Beira</h1>
-                <p>Compre a sua passagem de forma rápida, segura e sem complicações.</p>
-            </div>
+          <img
+            class="hero-img"
+            src="frontend/imagens/img-onibus.jpg"
+            alt="imagem de onibus"
+          />
+          <div class="hero-texto">
+            <h1>Bem-vindo ao Terminal de Ônibus da Beira</h1>
+            <p>
+              Compre a sua passagem de forma rápida, segura e sem complicações.
+            </p>
+          </div>
         </section>
 
         <section class="atalhos" aria-label="Atalhos">
-            <a class="atalho" href="indisponivel.html">
-                <span class="icone">🚌</span>
-                <h3>Consultar Viagens</h3>
-                <p>Veja horários, destinos e preços das passagens.</p>
-                <span class="seta">→</span>
-            </a>
-            <a class="atalho" href="indisponivel.html">
-                <span class="icone">🎟️</span>
-                <h3>Comprar Passagem</h3>
-                <p>Reserve o seu lugar de forma rápida e segura.</p>
-                <span class="seta">→</span>
-            </a>
-            <a class="atalho" href="indisponivel.html">
-                <span class="icone">🎫</span>
-                <h3>Meus Bilhetes</h3>
-                <p>Visualize e gira as suas reservas.</p>
-                <span class="seta">→</span>
-            </a>
-            <a class="atalho" href="indisponivel.html">
-                <span class="icone">👤</span>
-                <h3>Minha Conta</h3>
-                <p>Aceda aos seus dados e preferências.</p>
-                <span class="seta">→</span>
-            </a>
+          <a class="atalho" href="indisponivel.html">
+            <span class="icone">🚌</span>
+            <h3>Consultar Viagens</h3>
+            <p>Veja horários, destinos e preços das passagens.</p>
+            <span class="seta">→</span>
+          </a>
+          <a class="atalho" href="indisponivel.html">
+            <span class="icone">🎟️</span>
+            <h3>Comprar Passagem</h3>
+            <p>Reserve o seu lugar de forma rápida e segura.</p>
+            <span class="seta">→</span>
+          </a>
+          <a class="atalho" href="indisponivel.html">
+            <span class="icone">🎫</span>
+            <h3>Meus Bilhetes</h3>
+            <p>Visualize e gira as suas reservas.</p>
+            <span class="seta">→</span>
+          </a>
+          <a class="atalho" href="indisponivel.html">
+            <span class="icone">👤</span>
+            <h3>Minha Conta</h3>
+            <p>Aceda aos seus dados e preferências.</p>
+            <span class="seta">→</span>
+          </a>
         </section>
 
         <section class="busca">
-            <h2>🚌 Encontre a sua viagem</h2>
-            <form action="indisponivel.html" method="get">
-                <div>
-                    <label for="origem">Origem</label>
-                    <select id="origem" name="origem">
-                        <option>Beira</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="destino">Destino</label>
-                    <select id="destino" name="destino" required>
-                        <option value="">Selecione o destino</option>
-                        <option>Maputo</option>
-                        <option>Nampula</option>
-                        <option>Quelimane</option>
-                        <option>Chimoio</option>
-                        <option>Tete</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="data">Data da viagem</label>
-                    <input type="date" id="data" name="data" value="2026-10-01">
-                </div>
-                <button type="submit">🔍 Buscar</button>
-            </form>
+          <h2>🚌 Encontre a sua viagem</h2>
+          <form action="indisponivel.html" method="get">
+            <div>
+              <label for="origem">Origem</label>
+              <select id="origem" name="origem">
+                <option>Beira</option>
+              </select>
+            </div>
+            <div>
+              <label for="destino">Destino</label>
+              <select id="destino" name="destino" required>
+                <option value="">Selecione o destino</option>
+                <option>Maputo</option>
+                <option>Nampula</option>
+                <option>Quelimane</option>
+                <option>Chimoio</option>
+                <option>Tete</option>
+              </select>
+            </div>
+            <div>
+              <label for="data">Data da viagem</label>
+              <input type="date" id="data" name="data" value="2026-10-01" />
+            </div>
+            <button type="submit">🔍 Buscar</button>
+          </form>
         </section>
 
         <section class="destaques">
-            <div class="destaques-topo">
-                <h2>🚌 Viagens em destaque</h2>
-                <a href="indisponivel.html">Ver todas →</a>
-            </div>
-            <div class="viagens">
-                <article class="viagem">
-                    <h3>Beira → Maputo</h3>
-                    <p>🕒 08:00 | 12:30 | 16:00</p>
-                    <p>🚌 Transporte União</p>
-                    <p class="preco">10 MT / adulto</p>
-                    <a class="botao" href="indisponivel.html">Selecionar</a>
-                </article>
-                <article class="viagem">
-                    <h3>Beira → Nampula</h3>
-                    <p>🕒 07:30 | 13:00 | 18:30</p>
-                    <p>🚌 Expresso do Norte</p>
-                    <p class="preco">10 MT / adulto</p>
-                    <a class="botao" href="indisponivel.html">Selecionar</a>
-                </article>
-                <article class="viagem">
-                    <h3>Beira → Quelimane</h3>
-                    <p>🕒 09:00 | 14:20 | 19:00</p>
-                    <p>🚌 Transportes Maciene</p>
-                    <p class="preco">10 MT / adulto</p>
-                    <a class="botao" href="indisponivel.html">Selecionar</a>
-                </article>
-                <article class="viagem">
-                    <h3>Beira → Chimoio</h3>
-                    <p>🕒 06:30 | 11:00 | 17:15</p>
-                    <p>🚌 Viação Zambeze</p>
-                    <p class="preco">10 MT / adulto</p>
-                    <a class="botao" href="indisponivel.html">Selecionar</a>
-                </article>
-            </div>
+          <div class="destaques-topo">
+            <h2>🚌 Viagens em destaque</h2>
+            <a href="indisponivel.html">Ver todas →</a>
+          </div>
+          <div class="viagens">
+            <article class="viagem">
+              <h3>Beira → Maputo</h3>
+              <p>🕒 08:00 | 12:30 | 16:00</p>
+              <p>🚌 Transporte União</p>
+              <p class="preco">10 MT / adulto</p>
+              <a class="botao" href="indisponivel.html">Selecionar</a>
+            </article>
+            <article class="viagem">
+              <h3>Beira → Nampula</h3>
+              <p>🕒 07:30 | 13:00 | 18:30</p>
+              <p>🚌 Expresso do Norte</p>
+              <p class="preco">10 MT / adulto</p>
+              <a class="botao" href="indisponivel.html">Selecionar</a>
+            </article>
+            <article class="viagem">
+              <h3>Beira → Quelimane</h3>
+              <p>🕒 09:00 | 14:20 | 19:00</p>
+              <p>🚌 Transportes Maciene</p>
+              <p class="preco">10 MT / adulto</p>
+              <a class="botao" href="indisponivel.html">Selecionar</a>
+            </article>
+            <article class="viagem">
+              <h3>Beira → Chimoio</h3>
+              <p>🕒 06:30 | 11:00 | 17:15</p>
+              <p>🚌 Viação Zambeze</p>
+              <p class="preco">10 MT / adulto</p>
+              <a class="botao" href="indisponivel.html">Selecionar</a>
+            </article>
+          </div>
         </section>
-
-    </main>
-</div>
-</body>
+      </main>
+    </div>
+  </body>
 </html>
